@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Third-party apps
     # Local apps
     "apps.accounts",
+    "apps.music",
 ]
 
 MIDDLEWARE = [
