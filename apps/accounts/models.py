@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager, Group
 from django.db import models
 
 
@@ -13,6 +13,10 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+
+        if not user.groups.filter(name="user").exists():
+            user.groups.add(Group.objects.get(name="user"))
+
         return user
 
     def create_superuser(self, email, password, **extra_fields):
