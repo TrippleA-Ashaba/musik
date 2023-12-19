@@ -6,3 +6,6 @@ __pycache__/
 !**/migrations/__init__.py
 
 db.sqlite3
+
+.env
+musik/local_settings.py
