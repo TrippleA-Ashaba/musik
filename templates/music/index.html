@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+<!--  -->
+
+{% load static %} {% block title %} Home {% endblock %}
+<!--  -->
+
+{% block content %}
+<!--  -->
+<div>
+	<h1 class="text-center">Featured Music</h1>
+
+	<div class="d-flex gap-5 flex-wrap">
+		{% for song in songs %}
+		<div class="my-5">
+			<div class="card" style="width: 15rem">
+				<img src="{% static 'assets/images/card.png' %}" class="card-img-top" alt="..." />
+				<div class="card-body">
+					<h5 class="card-title">{{ song.title|title }}</h5>
+					<p class="card-text text-muted">
+						<span class="fw-semibold">By:</span> {{ song.artist }} <br />
+						<span class="fw-semibold">Album:</span> {{ song.album.title }} <br />
+						<span class="fw-semibold">Genre:</span>
+						<!--  -->
+						{% for genre in song.genre.all %}
+						<!--  -->
+						{{ genre.name }}
+						<!--  -->
+						{% if not forloop.last %}, {% endif %}
+						<!--  -->
+						{% endfor %}
+					</p>
+					<audio controls src="{{ song.file.url }}" style="width: 100%"></audio>
+				</div>
+			</div>
+		</div>
+		{% empty %}
+		<div class="my-5">
+			<p class="text-center">No songs found.</p>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
